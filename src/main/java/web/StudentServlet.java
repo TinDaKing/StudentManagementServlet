@@ -19,38 +19,52 @@ import model.Student;
 @WebServlet(name = "students", urlPatterns = { "/students" })
 public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public StudentServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public StudentServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			List<Student> studentList = StudentDAO.getInstance().getAllStudents();
-            
-            request.setAttribute("studentList", studentList);
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("students.jsp");
-            dispatcher.forward(request, response);
+			List<Student> studentList = null;
+			String pivot = request.getParameter("sortby");
+			
+			if (pivot != null) {
+				studentList = StudentDAO.getInstance().getAllStudentsSortBy(pivot);
+			} else {
+				studentList = StudentDAO.getInstance().getAllStudents();
+			}
+			request.setAttribute("studentList", studentList);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("students.jsp");
+			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			String nameInput = request.getParameter("studentName");
+			if (nameInput != "") {
+				List<Student> studentList = StudentDAO.getInstance().getStudentsByName(nameInput);
+				request.setAttribute("studentList", studentList);
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("students.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				doGet(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
