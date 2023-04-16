@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +49,17 @@ public class StudentDetailServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+			String name = request.getParameter("name");
+			double grade = Double.parseDouble(request.getParameter("grade"));
+			Date birthDay = Date.valueOf(request.getParameter("id"));
+			String address = request.getParameter("address");
+			String note = request.getParameter("note");
+			
+		} catch (Exception e) {
+			
+		}
 	}
 
 }
