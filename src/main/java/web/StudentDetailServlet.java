@@ -1,10 +1,8 @@
 package web;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.StudentDAO;
+import model.Student;
 
 /**
- * Servlet implementation class AddStudentServlet
+ * Servlet implementation class StudentDetailServlet
  */
-@WebServlet(name = "add_student", urlPatterns = { "/add_student" })
-public class AddStudentServlet extends HttpServlet {
+@WebServlet(name = "student-detail", urlPatterns = { "/student-detail" })
+public class StudentDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddStudentServlet() {
+    public StudentDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +31,24 @@ public class AddStudentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.sendRedirect("students");
+		// TODO Auto-generated method stub
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+			Student stu = StudentDAO.getInstance().getStudentByID(id);
+			request.setAttribute("student", stu);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("student-detail.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			String name = request.getParameter("name");
-			double grade = Double.parseDouble(request.getParameter("grade"));
-			Date birthday = Date.valueOf(request.getParameter("birthday"));
-			String address = request.getParameter("address");
-			String note = request.getParameter("note");
-			
-			StudentDAO.getInstance().addAStudent(name, grade, birthday, address, note);
-			response.sendRedirect("students");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

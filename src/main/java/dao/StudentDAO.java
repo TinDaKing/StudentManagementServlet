@@ -34,6 +34,7 @@ public class StudentDAO {
 			+ "WHERE name LIKE '%";
 	private static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE student_id=?;";
 	private static final String ADD_A_STUDENT = "INSERT INTO student(name,grade,birthday,address,note) VALUES (?,?,?,?,?);";
+	private static final String GET_A_STUDENT_BY_ID = "SELECT * FROM student WHERE student_id=?;"; 
 	private String prePivot;
 	private String nextOrder;
 
@@ -280,4 +281,44 @@ public class StudentDAO {
 		}
 		return false;
 	}
+	
+	public Student getStudentByID(int studentId) {
+		Connection connection = Connector.makeConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Student stu = null;
+		try {
+			ps = connection.prepareStatement(GET_A_STUDENT_BY_ID);
+			ps.setInt(1, studentId);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("student_id");
+				String name = rs.getString("name");
+				double grade = rs.getDouble("grade");
+				Date birthDay = rs.getDate("birthday");
+				String address = rs.getString("address");
+				String note = rs.getString("note");
+				stu = new Student(id, name, grade, birthDay, address, note);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+		}
+		return stu;
+	}
+	
 }
