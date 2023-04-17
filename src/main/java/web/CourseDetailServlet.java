@@ -16,16 +16,16 @@ import model.Course;
 import model.Student;
 
 /**
- * Servlet implementation class CourseDetail
+ * Servlet implementation class CourseDetailServlet
  */
 @WebServlet("/course_detail")
-public class CourseDetail extends HttpServlet {
+public class CourseDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CourseDetail() {
+    public CourseDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

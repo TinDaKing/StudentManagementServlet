@@ -1,27 +1,27 @@
 package web;
 
 import java.io.IOException;
-import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.StudentDAO;
+import dao.RegisterDAO;
 
 /**
- * Servlet implementation class AddStudentServlet
+ * Servlet implementation class RegisterServlet
  */
-@WebServlet(name = "add_student", urlPatterns = { "/add_student" })
-public class AddStudentServlet extends HttpServlet {
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddStudentServlet() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +30,12 @@ public class AddStudentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.sendRedirect("students");
+		try {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -39,14 +43,11 @@ public class AddStudentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String name = request.getParameter("name");
-			double grade = Double.parseDouble(request.getParameter("grade"));
-			Date birthday = Date.valueOf(request.getParameter("birthday"));
-			String address = request.getParameter("address");
-			String note = request.getParameter("note");
+			int studentId = Integer.parseInt(request.getParameter("studentId"));
+			int courseId = Integer.parseInt(request.getParameter("courseId"));
 			
-			StudentDAO.getInstance().addAStudent(name, grade, birthday, address, note);
-			response.sendRedirect("students");
+			RegisterDAO.getInstance().registerStudentToCourse(studentId, courseId);
+			response.sendRedirect("register");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
