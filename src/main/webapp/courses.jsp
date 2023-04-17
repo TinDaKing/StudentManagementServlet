@@ -36,11 +36,11 @@
 			<form action="add_course" method="post" class="add-course">
 				<p>Add new course:</p>
 				<span>Name</span> 
-				<input type="text" class="input-search" name="name" placeholder="Input course's name" /> 
+				<input type="text" class="input-search" name="name" placeholder="Input course's name" required/> 
 				<span>Lecturer</span> 
-				<input type="text" class="input-search" name="lecturer" placeholder="Input lecturer's name" /> 
+				<input type="text" class="input-search" name="lecturer" placeholder="Input lecturer's name" required/> 
 				<span>Year</span> 
-				<input type="number" step="1" class="input-search" name="year" placeholder="Ex: 2023" /> 
+				<input type="number" step="1" class="input-search" min="1800" max="${thisYear}" name="year" placeholder="Ex: 2023" required/> 
 				<span>Note</span> 
 				<input type="text" class="input-search" name="note" placeholder="(optional)" />
 				<button type="submit" class="button-search">Submit</button>
@@ -76,11 +76,11 @@
 					<td>${cou.year}</td>
 					<td>${cou.note}</td>
 					<td><a
-						href="<%=request.getContextPath()%>/course_detail?id=${stu.id}">
+						href="<%=request.getContextPath()%>/course_detail?id=${cou.id}">
 							<i class="fa-solid fa-circle-info"></i>
 					</a></td>
 					<td><a id ="delete-btn"
-						href="<%=request.getContextPath()%>/delete_course?id=${stu.id}"
+						href="<%=request.getContextPath()%>/delete_course?id=${cou.id}"
 						onclick="return confirm('Are you sure you want to delete this course?');">
 							<i class="fa-sharp fa-solid fa-trash"></i>
 					</a></td>
