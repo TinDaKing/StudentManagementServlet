@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import dao.StudentDAO;
 import model.Student;
 
-@WebServlet(name = "students", urlPatterns = { "/students" })
+@WebServlet("/students")
 public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	StudentServlet() {
+	public StudentServlet() {
 		super();
 	}
 
