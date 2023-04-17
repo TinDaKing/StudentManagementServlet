@@ -35,14 +35,16 @@
 
 			<form action="add_student" method="post" class="add-student">
 				<p>Add new student:</p>
-				<span>Name</span> <input type="text" class="input-search"
-					name="name" placeholder="Input name" /> <span>Grade</span> <input
-					type="number" step="0.01" class="input-search" name="grade"
-					placeholder="Ex: 8.25" /> <span>Birthday</span> <input type="date"
-					class="input-search" name="birthday" placeholder="mm-dd-yyyy" /> <span>Address</span>
-				<input type="text" class="input-search" name="address"
-					placeholder="Input address" /> <span>Note</span> <input type="text"
-					class="input-search" name="note" placeholder="(optional)" />
+				<span>Name</span> 
+				<input type="text" class="input-search" name="name" placeholder="Input name" /> 
+				<span>Grade</span> 
+				<input type="number" step="0.01" class="input-search" name="grade" placeholder="Ex: 8.25" /> 
+				<span>Birthday</span> 
+				<input type="date" class="input-search" name="birthday" placeholder="mm-dd-yyyy" /> 
+				<span>Address</span>
+				<input type="text" class="input-search" name="address" placeholder="Input address" /> 
+				<span>Note</span> 
+				<input type="text" class="input-search" name="note" placeholder="(optional)" />
 				<button type="submit" class="button-search">Submit</button>
 			</form>
 
@@ -83,10 +85,10 @@
 					<td>${stu.address}</td>
 					<td>${stu.note}</td>
 					<td><a
-						href="<%=request.getContextPath()%>/student-detail?id=${stu.id}">
+						href="<%=request.getContextPath()%>/student_detail?id=${stu.id}">
 							<i class="fa-solid fa-circle-info"></i>
 					</a></td>
-					<td><a
+					<td><a id ="delete-btn"
 						href="<%=request.getContextPath()%>/delete_student?id=${stu.id}"
 						onclick="return confirm('Are you sure you want to delete this item?');">
 							<i class="fa-sharp fa-solid fa-trash"></i>

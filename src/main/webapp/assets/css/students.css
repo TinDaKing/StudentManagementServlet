@@ -74,6 +74,13 @@ td {
 	padding: 10px 0px;
 	padding-right: 15px;
 }
+	
+a { 
+    color: #6b89a0;
+}
+#delete-btn{
+	color: #f93737;
+}
 .tool-section{
 	padding-right: 50px;
 	/*position: fixed;

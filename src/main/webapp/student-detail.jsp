@@ -18,44 +18,65 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-
-	<div class="student-info">
-		<h2>ID: 3</h2>
-		<h2>Name: Tran Hoang Tin</h2>
-		<br>
-		<p>
-			<b>Grade:</b> 8.25
-		</p>
-		<p>
-			<b>Birthday:</b> 02/06/2015
-		</p>
-		<p>
-			<b>Address:</b> 92 Nguyen Hue Quan 1 HCM
-		</p>
-		<p>
-			<b>Note:</b> good
-		</p>
-		<button class="button-search" id="button-edit">Change data</button>
-
-		<form action="student-detail" method="post" id="form-edit"
-			class="add-student hidden">
-			<p>Edit student:</p>
-			<span>ID</span> 
-			<input type="text" class="input-search" name="id" placeholder="Input new id" /> 
-			<span>Name</span> 
-			<input type="text" class="input-search" name="name" placeholder="Input new name" /> 
-			<span>Grade</span> 
-			<input type="number" step="0.01" class="input-search" name="grade" placeholder="Ex: 8.25" />
-			<span>Birthday</span> 
-			<input type="date" class="input-search" name="birthday" placeholder="mm-dd-yyyy" /> 
-			<span>Address</span> 
-			<input type="text" class="input-search" name="address" placeholder="Input new address" /> 
-			<span>Note</span> 
-			<input type="text" class="input-search" name="note" placeholder="(optional)" />
-			<button type="submit" class="button-search">Submit</button>
-		</form>
+	<div class ="content-section">
+		<div class="student-profile">
+			<div class="student-info">
+				<h2>ID: ${student.id}</h2>
+				<h2>Name: ${student.name}</h2>
+				<br>
+				<p><b>Grade:</b> ${student.grade}</p>
+				<p><b>Birthday:</b> ${student.birthday }</p>
+				<p><b>Address:</b> ${student.address}</p>
+				<p><b>Note:</b> ${student.note}</p>
+				<button class="button-search" id="button-edit">Change data</button>
+			</div>
+			
+			<form action="student_detail" method="post" class="edit-student hidden" id="form-edit">
+				<p>Edit student:</p>
+				<span>ID</span>
+				<input type="text" class="input-search just-read" name="id" value="${student.id}" readonly/> 
+				<span>Name</span> 
+				<input type="text" class="input-search" name="name" value="${student.name}" /> 
+				<span>Grade</span> 
+				<input type="number" step="0.01" class="input-search" name="grade" value="${student.grade}" />
+				<span>Birthday</span> 
+				<input type="date" class="input-search" name="birthday" value="${student.birthday}" /> 
+				<span>Address</span> 
+				<input type="text" class="input-search" name="address" value="${student.address}" /> 
+				<span>Note</span> 
+				<input type="text" class="input-search" name="note" value="${student.note}" />
+				<button type="submit" class="button-search">Submit</button>
+			</form>
+		</div>
+		
+		<h2>Courses this student joined</h2>
+		<table class="table-course">
+			<tr>
+				<th>ID </th>
+				<th>Name</th>
+				<th>Lecturer</th>
+				<th>Year</th>
+				<th>Note</th>
+				<th>Drop-out</th>
+			</tr>
+	
+			<c:forEach var="cou" items="${courseList}">
+				<tr class="add-space">
+					<td>${cou.id}</td>
+					<td>${cou.name}</td>
+					<td>${cou.lecturer}</td>
+					<td>${cou.year}</td>
+					<td>${stu.note}</td>
+					<td>
+					 <a href="<%=request.getContextPath()%>/cancel_register?student_id=${student.id}&course_id=${cou.id}">
+						<i class="fa-sharp fa-solid fa-ban" ></i>
+					</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
-
+	
 	<script src="assets/js/student-detail.js"></script>
 </body>
 </html>

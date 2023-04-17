@@ -28,13 +28,19 @@ public class StudentDAO {
 
 	private static final String GET_ALL_STUDENTS = "SELECT * FROM studentmanagement.student;";
 	private static final String GET_COURSES_A_STUDENT_JOINED = "SELECT c.* FROM studentcourse s\r\n"
-			+ "JOIN course c on s.class_id = c.class_id\r\n" + "where s.student_id = ?;";
-	private static final String GET_ALL_STUDENTS_SORT_BY = "SELECT * FROM studentmanagement.student\r\n" + "ORDER BY ";
+			+ "JOIN course c on s.class_id = c.class_id\r\n" 
+			+ "where s.student_id = ?;";
+	private static final String GET_ALL_STUDENTS_SORT_BY = "SELECT * FROM studentmanagement.student\r\n" 
+			+ "ORDER BY ";
 	private static final String GET_STUDENTS_BY_NAME = "SELECT * FROM studentmanagement.student\r\n"
 			+ "WHERE name LIKE '%";
 	private static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE student_id=?;";
-	private static final String ADD_A_STUDENT = "INSERT INTO student(name,grade,birthday,address,note) VALUES (?,?,?,?,?);";
-	private static final String GET_A_STUDENT_BY_ID = "SELECT * FROM student WHERE student_id=?;"; 
+	private static final String ADD_A_STUDENT = "INSERT INTO student(name,grade,birthday,address,note) "
+			+ "VALUES (?,?,?,?,?);";
+	private static final String GET_A_STUDENT_BY_ID = "SELECT * FROM student WHERE student_id=?;";
+	private static final String UPDATE_ROW_BY_ID = "UPDATE student\r\n"
+			+ "SET name = ?, grade = ?, birthday = ?, address = ?, note = ? \r\n"
+			+ "WHERE student_id = ?;";
 	private String prePivot;
 	private String nextOrder;
 
@@ -246,7 +252,7 @@ public class StudentDAO {
 		}
 		return false;
 	}
-	
+
 	public boolean addAStudent(String name, double grade, Date birthday, String address, String note) {
 		Connection connection = Connector.makeConnection();
 		PreparedStatement ps = null;
@@ -281,7 +287,7 @@ public class StudentDAO {
 		}
 		return false;
 	}
-	
+
 	public Student getStudentByID(int studentId) {
 		Connection connection = Connector.makeConnection();
 		PreparedStatement ps = null;
@@ -320,5 +326,40 @@ public class StudentDAO {
 		}
 		return stu;
 	}
-	
+
+	public boolean updateStudentByID(int studentId, String name, double grade, Date birthday, String address,
+			String note) {
+		Connection connection = Connector.makeConnection();
+		PreparedStatement ps = null;
+		int rowChanged = 0;
+		try {
+			ps = connection.prepareStatement(UPDATE_ROW_BY_ID);
+			ps.setString(1, name);
+			ps.setDouble(2, grade);
+			ps.setDate(3, birthday);
+			ps.setString(4, address);
+			ps.setString(5, note);
+			ps.setInt(6, studentId);
+			rowChanged = ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+		}
+		if (rowChanged > 0)
+			return true;
+		return false;
+	}
+
 }
