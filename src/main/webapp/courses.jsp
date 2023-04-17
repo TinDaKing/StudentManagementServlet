@@ -51,12 +51,12 @@
 		<table class="table-course">
 			<tr>
 				<th>ID &nbsp; <a
-					href="<%=request.getContextPath()%>/students?sortby=student_id">
+					href="<%=request.getContextPath()%>/courses?sortby=class_id">
 						<i class="fa-solid fa-sort"></i>
 				</a>
 				</th>
 				<th>Name &nbsp; <a
-					href="<%=request.getContextPath()%>/students?sortby=name"> <i
+					href="<%=request.getContextPath()%>/courses?sortby=name"> <i
 						class="fa-solid fa-sort"></i>
 				</a>
 				</th>
@@ -76,11 +76,11 @@
 					<td>${cou.year}</td>
 					<td>${cou.note}</td>
 					<td><a
-						href="<%=request.getContextPath()%>/student_detail?id=${stu.id}">
+						href="<%=request.getContextPath()%>/course_detail?id=${stu.id}">
 							<i class="fa-solid fa-circle-info"></i>
 					</a></td>
 					<td><a id ="delete-btn"
-						href="<%=request.getContextPath()%>/delete_student?id=${stu.id}"
+						href="<%=request.getContextPath()%>/delete_course?id=${stu.id}"
 						onclick="return confirm('Are you sure you want to delete this course?');">
 							<i class="fa-sharp fa-solid fa-trash"></i>
 					</a></td>

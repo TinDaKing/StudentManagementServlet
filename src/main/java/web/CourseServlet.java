@@ -1,11 +1,19 @@
 package web;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.CourseDAO;
+import dao.StudentDAO;
+import model.Course;
+import model.Student;
 
 /**
  * Servlet implementation class CourseServlet
@@ -28,7 +36,18 @@ public class CourseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			if
+			List<Course> courseList = null;
+			String pivot = request.getParameter("sortby");
+			
+			if (pivot != null) {
+				courseList = CourseDAO.getInstance().getAllCoursesSortBy(pivot);
+			} else {
+				courseList = CourseDAO.getInstance().getAllCourses();
+			}
+			request.setAttribute("courseList", courseList);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("courses.jsp");
+			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,7 +58,20 @@ public class CourseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			String nameInput = request.getParameter("name");
+			if (nameInput != "") {
+				List<Course> courseList = CourseDAO.getInstance().getCoursesByName(nameInput);
+				request.setAttribute("courseList", courseList);
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("courses.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				doGet(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

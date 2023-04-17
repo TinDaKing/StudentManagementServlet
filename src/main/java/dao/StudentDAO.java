@@ -28,8 +28,8 @@ public class StudentDAO {
 
 	private static final String GET_ALL_STUDENTS = "SELECT * FROM studentmanagement.student;";
 	private static final String GET_COURSES_A_STUDENT_JOINED = "SELECT c.* FROM studentcourse s\r\n"
-			+ "JOIN course c on s.class_id = c.class_id\r\n" 
-			+ "where s.student_id = ?;";
+			+ "			JOIN course c on c.class_id = s.class_id\r\n"
+			+ "			WHERE s.student_id=?;";
 	private static final String GET_ALL_STUDENTS_SORT_BY = "SELECT * FROM studentmanagement.student\r\n" 
 			+ "ORDER BY ";
 	private static final String GET_STUDENTS_BY_NAME = "SELECT * FROM studentmanagement.student\r\n"
