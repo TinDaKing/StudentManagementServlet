@@ -221,11 +221,11 @@ public class CourseDAO {
 		PreparedStatement ps2 = null;
 		int rowChanged = 0;
 		try {
-			ps = connection.prepareStatement(DELETE_COURSE_BY_ID);
+			ps = connection.prepareStatement(DELETE_REGISTER_RECORD_OF_COURSE);
 			ps.setInt(1, courseId);
 			rowChanged = ps.executeUpdate();
 			
-			ps2 = connection.prepareStatement(DELETE_REGISTER_RECORD_OF_COURSE);
+			ps2 = connection.prepareStatement(DELETE_COURSE_BY_ID);
 			ps2.setInt(1, courseId);
 			rowChanged += ps2.executeUpdate();
 			

@@ -13,19 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import dao.StudentDAO;
 import model.Student;
 
-/**
- * Servlet implementation class StudentServlet
- */
 @WebServlet(name = "students", urlPatterns = { "/students" })
 public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public StudentServlet() {
+	
+	StudentServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

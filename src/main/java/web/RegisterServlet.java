@@ -11,24 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.RegisterDAO;
 
-/**
- * Servlet implementation class RegisterServlet
- */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public RegisterServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
@@ -38,9 +28,6 @@ public class RegisterServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int studentId = Integer.parseInt(request.getParameter("studentId"));

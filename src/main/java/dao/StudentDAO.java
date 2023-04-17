@@ -230,11 +230,11 @@ public class StudentDAO {
 		PreparedStatement ps2 = null;
 		int rowChanged = 0;
 		try {
-			ps = connection.prepareStatement(DELETE_STUDENT_BY_ID);
+			ps = connection.prepareStatement(DELETE_REGISTER_RECORD_OF_STUDENT);
 			ps.setInt(1, studentId);
 			rowChanged = ps.executeUpdate();
 			
-			ps2 = connection.prepareStatement(DELETE_REGISTER_RECORD_OF_STUDENT);
+			ps2 = connection.prepareStatement(DELETE_STUDENT_BY_ID);
 			ps2.setInt(1, studentId);
 			rowChanged += ps2.executeUpdate();
 
