@@ -27,19 +27,21 @@ public class StudentDAO {
 	}
 
 	private static final String GET_ALL_STUDENTS = "SELECT * FROM studentmanagement.student;";
-	private static final String GET_COURSES_A_STUDENT_JOINED = "SELECT c.* FROM studentcourse s\r\n"
-			+ "			JOIN course c on c.class_id = s.class_id\r\n"
+	private static final String GET_COURSES_A_STUDENT_JOINED = "SELECT c.* FROM studentcourse s "
+			+ "			JOIN course c on c.class_id = s.class_id "
 			+ "			WHERE s.student_id=?;";
-	private static final String GET_ALL_STUDENTS_SORT_BY = "SELECT * FROM studentmanagement.student\r\n" 
+	private static final String GET_ALL_STUDENTS_SORT_BY = "SELECT * FROM studentmanagement.student " 
 			+ "ORDER BY ";
-	private static final String GET_STUDENTS_BY_NAME = "SELECT * FROM studentmanagement.student\r\n"
+	private static final String GET_STUDENTS_BY_NAME = "SELECT * FROM studentmanagement.student "
 			+ "WHERE name LIKE '%";
 	private static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE student_id=?;";
+	private static final String DELETE_REGISTER_RECORD_OF_STUDENT = "DELETE FROM studentcourse "
+			+ "WHERE student_id = ?;";
 	private static final String ADD_A_STUDENT = "INSERT INTO student(name,grade,birthday,address,note) "
 			+ "VALUES (?,?,?,?,?);";
 	private static final String GET_A_STUDENT_BY_ID = "SELECT * FROM student WHERE student_id=?;";
-	private static final String UPDATE_ROW_BY_ID = "UPDATE student\r\n"
-			+ "SET name = ?, grade = ?, birthday = ?, address = ?, note = ? \r\n"
+	private static final String UPDATE_ROW_BY_ID = "UPDATE student "
+			+ "SET name = ?, grade = ?, birthday = ?, address = ?, note = ? "
 			+ "WHERE student_id = ?;";
 	private String prePivot;
 	private String nextOrder;
@@ -225,11 +227,16 @@ public class StudentDAO {
 	public boolean deleteStudentByID(int studentId) {
 		Connection connection = Connector.makeConnection();
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 		int rowChanged = 0;
 		try {
 			ps = connection.prepareStatement(DELETE_STUDENT_BY_ID);
 			ps.setInt(1, studentId);
 			rowChanged = ps.executeUpdate();
+			
+			ps2 = connection.prepareStatement(DELETE_REGISTER_RECORD_OF_STUDENT);
+			ps2.setInt(1, studentId);
+			rowChanged += ps2.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -237,6 +244,9 @@ public class StudentDAO {
 			try {
 				if (ps != null) {
 					ps.close();
+				}
+				if (ps2 != null) {
+					ps2.close();
 				}
 				if (connection != null) {
 					connection.close();
@@ -246,7 +256,6 @@ public class StudentDAO {
 
 			}
 		}
-
 		if (rowChanged > 0) {
 			return true;
 		}

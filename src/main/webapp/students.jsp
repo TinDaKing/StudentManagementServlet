@@ -36,13 +36,13 @@
 			<form action="add_student" method="post" class="add-student">
 				<p>Add new student:</p>
 				<span>Name</span> 
-				<input type="text" class="input-search" name="name" placeholder="Input name" /> 
+				<input type="text" class="input-search" name="name" placeholder="Input name" required /> 
 				<span>Grade</span> 
-				<input type="number" step="0.01" class="input-search" name="grade" placeholder="Ex: 8.25" /> 
+				<input type="number" step="0.01" class="input-search" name="grade" placeholder="Ex: 8.25" required/> 
 				<span>Birthday</span> 
-				<input type="date" class="input-search" name="birthday" placeholder="mm-dd-yyyy" /> 
+				<input type="date" class="input-search" name="birthday" placeholder="mm-dd-yyyy" required/> 
 				<span>Address</span>
-				<input type="text" class="input-search" name="address" placeholder="Input address" /> 
+				<input type="text" class="input-search" name="address" placeholder="Input address" required/> 
 				<span>Note</span> 
 				<input type="text" class="input-search" name="note" placeholder="(optional)" />
 				<button type="submit" class="button-search">Submit</button>

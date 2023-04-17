@@ -69,7 +69,7 @@
 					<td>${stu.note}</td>
 					<td>
 					 <a id ="delete-btn"
-						href="<%=request.getContextPath()%>/cancel_register?student_id=${student.id}&course_id=${cou.id}"
+						href="<%=request.getContextPath()%>/cancel_register?student_id=${student.id}&course_id=${cou.id}&path=student_detail?id=${student.id}"
 						onclick="return confirm('Are you sure you want to cancel this register?');">
 							<i class="fa-sharp fa-solid fa-trash"></i>
 					</a>
@@ -79,6 +79,6 @@
 		</table>
 	</div>
 	
-	<script src="assets/js/student-detail.js"></script>
+	<script src="assets/js/pop-up-form.js"></script>
 </body>
 </html>
