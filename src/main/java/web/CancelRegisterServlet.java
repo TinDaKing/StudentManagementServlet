@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.RegisterDAO;
-import dao.StudentDAO;
 
 /**
  * Servlet implementation class CancelRegisterServlet
@@ -18,36 +17,39 @@ import dao.StudentDAO;
 @WebServlet("/cancel_register")
 public class CancelRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CancelRegisterServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String referer = request.getHeader("Referer");
-		response.sendRedirect(referer);
+	public CancelRegisterServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			int studentId = Integer.parseInt(request.getParameter("student_id"));
 			int courseId = Integer.parseInt(request.getParameter("course_id"));
-			
 			RegisterDAO.getInstance().cancelRegister(studentId, courseId);
-			String referer = request.getHeader("Referer");
-			response.sendRedirect(referer);
+			response.sendRedirect("students");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			response.sendRedirect("students");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

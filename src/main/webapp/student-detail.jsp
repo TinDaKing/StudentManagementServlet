@@ -68,8 +68,10 @@
 					<td>${cou.year}</td>
 					<td>${stu.note}</td>
 					<td>
-					 <a href="<%=request.getContextPath()%>/cancel_register?student_id=${student.id}&course_id=${cou.id}">
-						<i class="fa-sharp fa-solid fa-ban" ></i>
+					 <a id ="delete-btn"
+						href="<%=request.getContextPath()%>/cancel_register?student_id=${student.id}&course_id=${cou.id}"
+						onclick="return confirm('Are you sure you want to cancel this register?');">
+							<i class="fa-sharp fa-solid fa-trash"></i>
 					</a>
 					</td>
 				</tr>
