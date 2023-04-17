@@ -33,10 +33,11 @@ public class CancelRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			String path = request.getParameter("path");
 			int studentId = Integer.parseInt(request.getParameter("student_id"));
 			int courseId = Integer.parseInt(request.getParameter("course_id"));
 			RegisterDAO.getInstance().cancelRegister(studentId, courseId);
-			response.sendRedirect("students");
+			response.sendRedirect(path);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
