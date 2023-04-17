@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.time.Year;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CourseDAO;
-import dao.StudentDAO;
 import model.Course;
-import model.Student;
 
 /**
  * Servlet implementation class CourseServlet
@@ -44,6 +43,8 @@ public class CourseServlet extends HttpServlet {
 			} else {
 				courseList = CourseDAO.getInstance().getAllCourses();
 			}
+			
+			request.setAttribute("thisYear",  Year.now().getValue()+1);
 			request.setAttribute("courseList", courseList);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("courses.jsp");
