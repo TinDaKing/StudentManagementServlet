@@ -23,10 +23,10 @@
 		<h2>Register student to a course</h2>
 		<form action="register" method="post" class="form-register">
 			<span>Student ID</span> 
-			<input type="number" step="1" class="input-search" min="1" max="99999999" name="studentId" placeholder="Ex: 9" /> 
+			<input type="number" step="1" class="input-search" min="1" max="99999999" name="studentId" placeholder="Ex: 9" required/> 
 			<i class="fa-solid fa-right-to-bracket"></i>
 			<span>Course ID</span> 
-			<input type="number" step="1" class="input-search" min="1" max="99999999" name="courseId" placeholder="Ex: 10" /> 
+			<input type="number" step="1" class="input-search" min="1" max="99999999" name="courseId" placeholder="Ex: 10" required/> 
 			<button type="submit" class="button-search">Submit</button>
 		</form>
 	</div>

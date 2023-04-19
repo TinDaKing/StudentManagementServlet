@@ -37,6 +37,7 @@ public class RegisterServlet extends HttpServlet {
 			response.sendRedirect("register");
 		} catch (Exception e) {
 			e.printStackTrace();
+			response.sendRedirect("register");
 		}
 	}
 
